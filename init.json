@@ -1,0 +1,23 @@
+{
+    "base_master" : {
+        "location" : "",
+        "username" : "",
+        "password" : "",
+        "depot_location" : "",
+        "depot_username" : ""
+    },
+
+    "base_developer" : {
+        "location" : "",
+        "username" : "",
+        "password" : "",
+        "depot_location" : "",
+        "depot_username" : ""
+    },
+    
+    "base_dump" : {
+        "MASTER" : "",
+        "DEVELOPER" : "",
+        "REPO" : ""
+    }
+}
