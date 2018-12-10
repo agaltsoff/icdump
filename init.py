@@ -14,4 +14,3 @@ base_developer= Base(init["base_developer"])
 
 base_dump= Base(init["base_dump"])
 
-print(base_dump.__dict__)
