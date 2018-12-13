@@ -6,7 +6,7 @@ class Base:
         for key, value in data.items():
             self.__dict__[key] = value    
     
-init = json.load(codecs.open('init_agalcov.json', 'r', 'utf-8-sig'))
+init = json.load(codecs.open('init.json', 'r', 'utf-8-sig'))
 
 base_master= Base(init["base_master"])
 

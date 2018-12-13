@@ -1,23 +1,24 @@
 {
     "base_master" : {
-        "location" : "",
+        "location" : "/F C:\\bases\\icdump_master",
         "username" : "",
         "password" : "",
-        "depot_location" : "",
-        "depot_username" : ""
+        "depot_location" : "C:\\depot\\icdump",
+        "depot_username" : "Разработчик_master"
     },
 
     "base_developer" : {
-        "location" : "",
+        "location" : "/F C:\\bases\\icdump_dev",
         "username" : "",
         "password" : "",
-        "depot_location" : "",
-        "depot_username" : ""
+        "depot_location" : "C:\\depot\\icdump",
+        "depot_username" : "Разработчик"
     },
     
     "base_dump" : {
-        "MASTER" : "",
-        "DEVELOPER" : "",
-        "REPO" : ""
+        "VER" : "8.3.13.1576",
+        "MASTER" : "C:\\icdump\\master",
+        "DEVELOPER" : "C:\\icdump\\dev",
+        "REPO" : "C:\\icdump\\repo"
     }
 }
