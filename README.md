@@ -19,11 +19,11 @@
 
 N|Имя файла|Описание
 ---|---|---
-1| [init_master](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|Выгружает эталон 
-2| [update_master](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|Выгружает изменения эталона 
-3| [precommit](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|Выгружает различия между разработкой и эталоном
-4| [master_repo](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.
-5| [update_repo](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Копирует файлы из выгрузки разработки в репозиторий
+1| [init_master.py](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|Выгружает эталон 
+2| [update_master.py](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|Выгружает изменения эталона 
+3| [precommit.py](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|Выгружает различия между разработкой и эталоном
+4| [master_repo.py](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.
+5| [update_repo.py](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Копирует файлы из выгрузки разработки в репозиторий
 6|[init.json](https://github.com/agaltsoff/icdump/blob/master/init.json)|Настройки подключения к базам и расположения выгрузок
 
 **ПОРЯДОК РАБОТЫ**
