@@ -19,25 +19,25 @@
 
 N|Имя файла|Описание
 ---|---|---
-1.| init_master|          Выгружает эталон 
-2.| update_master|        Выгружает изменения эталона 
-3.| precommit|            Выгружает различия между разработкой и эталоном
-4.| master_repo|          Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.
-5.| update_repo|          Копирует файлы из выгрузки разработки в репозиторий
-6.| readme.md|            Этот файл
+1| [init_master](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|Выгружает эталон 
+2| [update_master](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|Выгружает изменения эталона 
+3| [precommit](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|Выгружает различия между разработкой и эталоном
+4| [master_repo](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.
+5| [update_repo](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Копирует файлы из выгрузки разработки в репозиторий
+6|[init.json](https://github.com/agaltsoff/icdump/blob/master/init.json)|Настройки подключения к базам и расположения выгрузок
 
 **ПОРЯДОК РАБОТЫ**
 
 |Действие|Команда|Результат
 |---|---|---|
 |**Перед началом работы**|
-| Выгрузить эталон|                     init_master|             Начальная выгрузка эталона|
+| Выгрузить эталон|[init_master](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|          Начальная выгрузка эталона|
 |**После захвата и изменения объектов**
-|Обновить выгрузку эталона|            update_master|           В выгрузке эталона изменения сделанные другими во время изменения объектов|
-| Выгрузить разработку|                 precommit|               В выгрузке разработки изменённые объекты|
-| Обновить эталон в репозитории|        master_repo|             Оригиналы изменённых объектов в репозитории|
-| Git Commit||                                                   Оригиналы изменённых объектов в Git|
-| Обновить разработку в репозитории|    update_repo|             Изменённые объекты в репозитории|
+|Обновить выгрузку эталона|[update_master](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|           В выгрузке эталона изменения сделанные другими во время изменения объектов|
+| Выгрузить разработку|[precommit](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|В выгрузке разработки изменённые объекты|
+| Обновить эталон в репозитории|[master_repo](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|             Оригиналы изменённых объектов в репозитории|
+| Git Commit||Оригиналы изменённых объектов в Git|
+| Обновить разработку в репозитории|[update_repo](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Изменённые объекты в репозитории|
 | Git Commit||                                                   Изменённые объекты в Git|
 
 
