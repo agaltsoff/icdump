@@ -10,6 +10,9 @@ for root, dirs, files in os.walk(base_dump.DEVELOPER):
         src= os.path.join(root, dev_f)
         srcrp= os.path.relpath(src, base_dump.DEVELOPER)
         dst= os.path.join(base_dump.REPO, srcrp)
-        ##shutil.copy(src, dst)
-        print(src, ' -> ', dst)
+        path= os.path.dirname(dst)
+        if not os.path.exists(path):
+            os.makedirs(path)
+        shutil.copy(src, dst)
+        ##print(src, ' -> ', dst)
 
