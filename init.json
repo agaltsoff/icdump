@@ -22,5 +22,5 @@
         "REPO" : "C:\\icdump\\repo"
     },
 
-    "debug" : true
+    "debug" : false
 }
