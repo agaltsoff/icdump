@@ -1,3 +1,5 @@
+# initialization
+
 from init import base_master, base_developer, base_dump
 
 def get_base_connect_str(params):
@@ -11,4 +13,11 @@ GEAR= get_gear(base_dump.VER)
 BASE_MASTER= get_base_connect_str(base_master)
 
 BASE_DEVELOPER= get_base_connect_str(base_developer)
+
+# helper functions
+
+def is_skipped(fn):
+    return fn in ['ConfigDumpInfo.xml', 'Configuration.xml']
+
+
 

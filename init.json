@@ -20,5 +20,7 @@
         "MASTER" : "C:\\icdump\\master",
         "DEVELOPER" : "C:\\icdump\\dev",
         "REPO" : "C:\\icdump\\repo"
-    }
+    },
+
+    "debug" : true
 }

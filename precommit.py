@@ -6,9 +6,11 @@ from icdump import base_dump, GEAR, BASE_DEVELOPER
 
 # initialize master dump
 
-#clear dev dir first
+# clear dev dir first
 
-if os.path.exists(base_dump.DEVELOPER): shutil.rmtree(base_dump.DEVELOPER)
+if os.path.exists(base_dump.DEVELOPER): 
+    shutil.rmtree(base_dump.DEVELOPER)
+
 os.mkdir(base_dump.DEVELOPER)
 
 subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_DEVELOPER))
