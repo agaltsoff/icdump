@@ -4,7 +4,7 @@
 
 **ЦЕЛЬ**
 
-После изменения объектов перед их выгрузкой в репозитарий помещать в Git их выгрузку без изменений, чтобы после помещения выгрузки с изменениями их можно было сравнить с оригиналами, не выгружая в Git всю конфигурацию.
+После изменения объектов перед их выгрузкой в Git помещать в Git их выгрузку без изменений, чтобы после помещения выгрузки с изменениями можно было увидеть в Git эти изменения, не выгружая в Git всю конфигурацию.
         
 **ОПРЕДЕЛЕНИЯ**
 
@@ -19,28 +19,29 @@
 |---|---|---|
 |1|[init_master.py](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|Выгружает эталон |
 |2|[update_master.py](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|Выгружает изменения эталона|
-|3|[precommit.py](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|Выгружает различия между разработкой и эталоном|
-|4|[master_repo.py](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.|
-|5|[update_repo.py](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Копирует файлы из выгрузки разработки в репозиторий|
-|6|[init.json](https://github.com/agaltsoff/icdump/blob/master/init.json)|Настройки подключения к базам и расположения выгрузок|
+|3|[precommit.py](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|Выгружает различия между разработкой и эталоном. <br />|
+|4|[master_repo.py](https://github.com/agaltsoff/icdump/blob/push_cleanup/master_repo.py)|Файлы, которые есть в репозитории, но нет в выгрузке разработки, удаляет из репозитория.<br />Файлы, которые есть в выгрузке разработки, но нет в репозитории, копирует из выгрузки эталона в репозиторий.|
+|5|[develop_repo.py](https://github.com/agaltsoff/icdump/blob/master/develop_repo.py)|Копирует файлы из выгрузки разработки в репозиторий|
+|6|[init.json](https://github.com/agaltsoff/icdump/blob/master/init.json)|Настройки подключения к базам и расположения выгрузок. При наличии ключа *debug* со значением *true* действия с файлами не производятся, а выводятся на экран.|
 
 **ПОРЯДОК РАБОТЫ**
 
 |Действие|Команда|Результат|
 |---|---|---|
-|**Перед началом работы**|
+|**Перед началом работы**|||
 | Выгрузить эталон|[init_master](https://github.com/agaltsoff/icdump/blob/master/init_master.py)|Начальная выгрузка эталона|
-|**После захвата и изменения объектов**|
+|**После захвата и изменения объектов**|||
 |Обновить выгрузку эталона|[update_master](https://github.com/agaltsoff/icdump/blob/master/update_master.py)|В выгрузке эталона изменения сделанные другими во время изменения объектов|
 |Выгрузить разработку|[precommit](https://github.com/agaltsoff/icdump/blob/master/precommit.py)|В выгрузке разработки изменённые объекты|
 |Обновить эталон в репозитории|[master_repo](https://github.com/agaltsoff/icdump/blob/master/master_repo.py)|Оригиналы изменённых объектов в репозитории|
 |Git Commit||Оригиналы изменённых объектов в Git|
-|Обновить разработку в репозитории|[update_repo](https://github.com/agaltsoff/icdump/blob/master/update_repo.py)|Изменённые объекты в репозитории|
+|Обновить разработку в репозитории|[develop_repo](https://github.com/agaltsoff/icdump/blob/master/develop_repo.py)|Изменённые объекты в репозитории|
 |Git Commit||Изменённые объекты в Git|
-
 
 Таким образом при каждой выгрузке, когда появились новые изменённые объекты, сначала в Git будут выгружены их оригиналы, затем их изменения. В результате можно будет сравнивать изменения с оригиналами, не выгружая в Git всю конфигурацию.
 
-**Примечание**
+При использовании git-flow *master_repo* делать в ветку *master*, *develop_repo* в ветку *develop* или в ветку *feature* для этих изменений и перед этим делать *merge* в эту ветку ветки *master*.
+
+**Примечания**
 
 Работало в 8.3.13. В 8.3.12 precommit выгружает ВСЮ конфигурацию, хотя в файлах ConfigDumpInfo.xml Kdiff3 показывает различия только в нескольких строках реально изменённых объектов.

@@ -7,8 +7,8 @@
         "depot_username" : "Разработчик_master"
     },
 
-    "base_developer" : {
-        "location" : "/F C:\\bases\\icdump_dev",
+    "base_develop" : {
+        "location" : "/F C:\\bases\\icdump_develop",
         "username" : "",
         "password" : "",
         "depot_location" : "C:\\depot\\icdump",
@@ -18,7 +18,9 @@
     "base_dump" : {
         "VER" : "8.3.13.1576",
         "MASTER" : "C:\\icdump\\master",
-        "DEVELOPER" : "C:\\icdump\\dev",
+        "DEVELOP" : "C:\\icdump\\develop",
         "REPO" : "C:\\icdump\\repo"
-    }
+    },
+
+    "debug" : false
 }
