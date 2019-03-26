@@ -13,7 +13,7 @@ init = json.load(codecs.open(profile + '.json', 'r', 'utf-8-sig'))
 
 base_master= Base(init["base_master"])
 
-base_developer= Base(init["base_developer"])
+base_develop= Base(init["base_develop"])
 
 base_dump= Base(init["base_dump"])
 

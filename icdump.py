@@ -1,6 +1,6 @@
 # initialization
 
-from init import base_master, base_developer, base_dump
+from init import base_master, base_develop, base_dump
 
 def get_base_connect_str(params):
     return '%s /N "%s" /P "%s" /ConfigurationRepositoryF "%s" /ConfigurationRepositoryN "%s" /ConfigurationRepositoryP ""'%(params.location, params.username, params.password, params.depot_location, params.depot_username)
@@ -12,12 +12,12 @@ GEAR= get_gear(base_dump.VER)
 
 BASE_MASTER= get_base_connect_str(base_master)
 
-BASE_DEVELOPER= get_base_connect_str(base_developer)
+BASE_DEVELOP= get_base_connect_str(base_develop)
 
 # helper functions
 
 def is_skipped(fn):
-    return fn in ['ConfigDumpInfo.xml', 'Configuration.xml']
+    return fn in ['Configuration.xml']
 
 
 
