@@ -1,23 +1,11 @@
-# initialization
+import subprocess
 
-from init import base_master, base_develop, base_dump
+from init import base_dump, GEAR, BASE_MASTER
 
-def get_base_connect_str(params):
-    return '%s /N "%s" /P "%s" /ConfigurationRepositoryF "%s" /ConfigurationRepositoryN "%s" /ConfigurationRepositoryP ""'%(params.location, params.username, params.password, params.depot_location, params.depot_username)
-
-def get_gear(ver):
-    return '"C:\\Program Files (x86)\\1cv8\\%s\\bin\\1cv8.exe" DESIGNER /DisableStartupMessages'%(ver)
-
-GEAR= get_gear(base_dump.VER)
-
-BASE_MASTER= get_base_connect_str(base_master)
-
-BASE_DEVELOP= get_base_connect_str(base_develop)
-
-# helper functions
-
-def is_skipped(fn):
-    return fn in ['Configuration.xml']
+# initialize master dump
+def setup():
+    subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_MASTER))
+    subprocess.call('%s %s /DumpConfigToFiles %s'%(GEAR, BASE_MASTER, base_dump.MASTER))
 
 
 
