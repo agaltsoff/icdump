@@ -27,9 +27,6 @@ def precommit():
     subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_DEVELOP))
     subprocess.call('%s %s /DumpConfigToFiles %s -update -configDumpInfoForChanges %s\\ConfigDumpInfo.xml'%(GEAR, BASE_DEVELOP, base_dump.DEVELOP, base_dump.MASTER))
 
-
-from icdump import base_dump, is_skipped
-
 # delete repo files that are not in developer files from repo
 def master():
 
@@ -75,3 +72,17 @@ def master():
                     if not os.path.exists(path):
                         os.makedirs(path)
                     shutil.copy(src, dst)
+
+# copy files from dump to repo
+def develop():
+    for root, dirs, files in os.walk(base_dump.DEVELOP):
+        for dev_f in files:
+            if is_skipped(dev_f): 
+                continue
+            src= os.path.join(root, dev_f)
+            srcrp= os.path.relpath(src, base_dump.DEVELOP)
+            dst= os.path.join(base_dump.REPO, srcrp)
+            path= os.path.dirname(dst)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            shutil.copy(src, dst)
