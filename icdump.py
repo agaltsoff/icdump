@@ -7,5 +7,9 @@ def setup():
     subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_MASTER))
     subprocess.call('%s %s /DumpConfigToFiles %s'%(GEAR, BASE_MASTER, base_dump.MASTER))
 
+# update master dump
+def update():
+    subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_MASTER))
+    subprocess.call('%s %s /DumpConfigToFiles %s -update'%(GEAR, BASE_MASTER, base_dump.MASTER))
 
 
