@@ -2,14 +2,23 @@ import json
 import codecs
 
 # initial settings json file name without extention
-profile= '.\\config' 
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами')
+parser.add_argument('command', metavar='COMMAND', type=str, help='Команда', choices= ['setup','commit','update','precommit','master','develop'])
+parser.add_argument('--config', metavar='CONFIG', type=str, help='Файл настроек в формате json', default='.\\config.json')
+
+args= parser.parse_args()
+
+config_fn= args.config
 
 class Base:
     def __init__(self, data):
         for key, value in data.items():
             self.__dict__[key] = value    
     
-init = json.load(codecs.open(profile + '.json', 'r', 'utf-8-sig'))
+init = json.load(codecs.open(config_fn, 'r', 'utf-8-sig'))
 
 base_master= Base(init["base_master"])
 
