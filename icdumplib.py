@@ -49,6 +49,7 @@ def is_skipped(fn):
 
 import shutil
 import os
+import subprocess
 
 if "debug" in init:
     debug= init["debug"]
@@ -68,4 +69,5 @@ if debug:
     shutil.copy= debug_copy
     os.remove= debug_remove
     os.makedirs= debug_makedirs
+    subprocess.call= print
 
