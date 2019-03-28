@@ -17,8 +17,7 @@
 
 | Имя          | Описание                                                     |
 | ------------ | ------------------------------------------------------------ |
-| icdump.py    | Использование: icdump.py COMMAND [--config CONFIG]<br/>
-  COMMAND          Команда<br />  --config CONFIG  Файл настроек в формате json, по умолчанию config.json |
+| icdump.py    | Использование: icdump.py COMMAND [--config CONFIG]  <br />COMMAND Команда <br />--config CONFIG Файл настроек в формате json, по умолчанию config.json |
 | icdumplib.py | Инициализация и вспомогательные функции.                     |
 | config.json  | Настройки                                                    |
 
