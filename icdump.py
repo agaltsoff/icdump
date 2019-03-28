@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 
-from init import base_dump, is_skipped, GEAR, BASE_MASTER, BASE_DEVELOP
+from icdumplib import base_dump, is_skipped, GEAR, BASE_MASTER, BASE_DEVELOP
 
 # initialize master dump
 def setup():
@@ -86,3 +86,43 @@ def develop():
             if not os.path.exists(path):
                 os.makedirs(path)
             shutil.copy(src, dst)
+
+def commit():
+    pass
+    
+
+commands= { 'setup' : setup, 'commit' : commit, 'update' : update, 'precommit' : precommit, 'master' : master, 'develop' : develop }
+
+if __name__ == '__main__':
+
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами')
+    parser.add_argument('command', metavar='COMMAND', type=str, help='Команда', choices= ['setup','commit','update','precommit','master','develop'])
+
+    args= parser.parse_args()
+
+    commands[args.command]()
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

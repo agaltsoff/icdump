@@ -2,7 +2,7 @@ import json
 import codecs
 
 # initial settings json file name without extention
-profile= 'init' 
+profile= '.\\config' 
 
 class Base:
     def __init__(self, data):
