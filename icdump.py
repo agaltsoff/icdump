@@ -88,7 +88,7 @@ def develop():
             shutil.copy(src, dst)
 
 def commit():
-    pass
+    print('Not implemented')
     
 commands= { 'setup' : setup, 'commit' : commit, 'update' : update, 'precommit' : precommit, 'master' : master, 'develop' : develop }
 

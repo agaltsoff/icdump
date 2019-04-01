@@ -5,8 +5,17 @@ import codecs
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами')
-parser.add_argument('command', metavar='COMMAND', type=str, help='Команда', choices= ['setup','commit','update','precommit','master','develop'])
+commands= {
+    'setup'     : 'Начальная выгрузка эталона',
+    'commit'    : 'git commit (не реализовано)',
+    'update'    : 'Выгрузка изменений эталона',
+    'precommit' : 'Выгрузка отличий разработки от эталона',
+    'master'    : 'Перенос отличий из эталона в репозиторий',
+    'develop'   : 'Перенос отличий из разработки в репозиторий',
+}
+
+parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами', formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('command', metavar='COMMAND', type=str, choices= commands.keys(), help='\n'.join("%s\t%s" % (str(k), str(v)) for (k, v) in commands.items()))
 parser.add_argument('--config', metavar='CONFIG', type=str, help='Файл настроек в формате json', default='.\\config.json')
 
 args= parser.parse_args()
