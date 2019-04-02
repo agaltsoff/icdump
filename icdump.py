@@ -83,14 +83,32 @@ def develop():
             srcrp= os.path.relpath(src, base_dump.DEVELOP)
             dst= os.path.join(base_dump.REPO, srcrp)
             path= os.path.dirname(dst)
-            if not os.path.exists(path):
-                os.makedirs(path)
+            if not os.path.exists(path): os.makedirs(path)
             shutil.copy(src, dst)
+
+def checkout():
+    print('Not implemented')
+
+# create rollback directory of master files that are in develop and upload them to develop configuration
+def rollback():
+
+    rollback_path= os.path.join(args.path, 'rollback')
+
+    if os.path.exists(rollback_path): shutil.rmtree(rollback_path)
+
+    os.mkdir(rollback_path)
+
+    for root, dirs, files in os.walk(base_dump.DEVELOP):
+        for develop_fn in files:
+            develop_rp= os.path.relpath(os.path.join(root, develop_fn), base_dump.DEVELOP)
+            master_fn= os.path.join(base_dump.MASTER, develop_rp)
+            rollback_fn= os.path.join(rollback_path, develop_rp)
+            rollback_path= os.path.dirname(rollback_fn)
+            if not os.path.exists(rollback_path): os.makedirs(rollback_path)
+            shutil.copy(master_fn, rollback_fn)
 
 def commit():
     print('Not implemented')
-    
-commands= { 'setup' : setup, 'commit' : commit, 'update' : update, 'precommit' : precommit, 'master' : master, 'develop' : develop }
 
 if __name__ == '__main__':
 
@@ -98,7 +116,7 @@ if __name__ == '__main__':
 
     os.chdir(args.path)
 
-    commands[args.command]()
+    locals()[args.command]()
 
     os.chdir(cwd)
 
