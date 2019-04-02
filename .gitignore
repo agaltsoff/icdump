@@ -102,5 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# User configs
 base_*.py
 init_*.json
+config_*.json
+
