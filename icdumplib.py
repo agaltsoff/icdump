@@ -1,3 +1,4 @@
+import os
 import json
 import codecs
 
@@ -17,6 +18,7 @@ commands= {
 parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами', formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('command', metavar='COMMAND', type=str, choices= commands.keys(), help='\n'.join("%s\t%s" % (str(k), str(v)) for (k, v) in commands.items()))
 parser.add_argument('--config', metavar='CONFIG', type=str, help='Файл настроек в формате json', default='.\\config.json')
+parser.add_argument('--path', metavar='PATH', type=str, help='Рабочий каталог', default='.\\')
 
 args= parser.parse_args()
 
@@ -27,7 +29,7 @@ class Base:
         for key, value in data.items():
             self.__dict__[key] = value    
     
-init = json.load(codecs.open(config_fn, 'r', 'utf-8-sig'))
+init = json.load(codecs.open(os.path.join(args.path, config_fn), 'r', 'utf-8-sig'))
 
 base_master= Base(init["base_master"])
 

@@ -94,7 +94,13 @@ commands= { 'setup' : setup, 'commit' : commit, 'update' : update, 'precommit' :
 
 if __name__ == '__main__':
 
+    cwd= os.getcwd()
+
+    os.chdir(args.path)
+
     commands[args.command]()
+
+    os.chdir(cwd)
 
     
     
