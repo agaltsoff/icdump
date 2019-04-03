@@ -2,6 +2,8 @@ import os
 import shutil
 import subprocess
 
+from codecs import open
+
 from icdumplib import args, base_dump, is_skipped, GEAR, BASE_MASTER, BASE_DEVELOP
 
 # initialize master dump
@@ -17,17 +19,16 @@ def update():
 # unload develop diffs from master
 def precommit():
 
-    # clear dev dir first
+    # clear develop dir first
 
-    if os.path.exists(base_dump.DEVELOP): 
-        shutil.rmtree(base_dump.DEVELOP)
+    if os.path.exists(base_dump.DEVELOP): shutil.rmtree(base_dump.DEVELOP)
 
     os.mkdir(base_dump.DEVELOP)
 
     subprocess.call('%s %s /ConfigurationRepositoryUpdateCfg -force'%(GEAR, BASE_DEVELOP))
     subprocess.call('%s %s /DumpConfigToFiles %s -update -configDumpInfoForChanges %s\\ConfigDumpInfo.xml'%(GEAR, BASE_DEVELOP, base_dump.DEVELOP, base_dump.MASTER))
 
-# delete repo files that are not in developer files from repo
+# delete repo files that are not in develop files from repo
 def master():
 
     dev_files= [] # contains relative paths
@@ -48,7 +49,7 @@ def master():
                 repo_fn= os.path.join(base_dump.REPO, repo_fnrp)
                 os.remove(repo_fn)
 
-    ## copy developer files that are not in repo from master to repo
+    # copy develop files that are not in repo from master to repo
 
     repo_files= []
 
@@ -73,7 +74,7 @@ def master():
                         os.makedirs(path)
                     shutil.copy(src, dst)
 
-# copy files from dump to repo
+# copy develop files to repo
 def develop():
     for root, dirs, files in os.walk(base_dump.DEVELOP):
         for dev_f in files:
@@ -86,10 +87,11 @@ def develop():
             if not os.path.exists(path): os.makedirs(path)
             shutil.copy(src, dst)
 
+#upload repo files to develop configuration
 def checkout():
-    print('Not implemented')
+    subprocess.call('%s %s /LoadConfigFromFiles %s -AllWritable'%(GEAR, BASE_DEVELOP, base_dump.REPO))
 
-# create rollback directory of master files that are in develop and upload them to develop configuration
+# create rollback directory of master files that are developed and upload them to develop configuration
 def rollback():
 
     rollback_path= os.path.join(args.path, 'rollback')
@@ -103,9 +105,27 @@ def rollback():
             develop_rp= os.path.relpath(os.path.join(root, develop_fn), base_dump.DEVELOP)
             master_fn= os.path.join(base_dump.MASTER, develop_rp)
             rollback_fn= os.path.join(rollback_path, develop_rp)
-            rollback_path= os.path.dirname(rollback_fn)
-            if not os.path.exists(rollback_path): os.makedirs(rollback_path)
+            rollback_fn_path= os.path.dirname(rollback_fn)
+            if not os.path.exists(rollback_fn_path): os.makedirs(rollback_fn_path)
             shutil.copy(master_fn, rollback_fn)
+
+    # creating rollback file list for uploading
+
+    file_list= ''
+
+    for root, dirs, files in os.walk(rollback_path):
+        if root != rollback_path:
+            for fn in files: file_list+= os.path.join(root, fn) + '\n'
+
+    if file_list != '': file_list= file_list[:-1]
+
+    list_fn= os.path.join(rollback_path, 'filelist.txt');
+
+    with open(list_fn, 'w', 'utf-8') as list_file:
+        list_file.write(file_list)
+
+    subprocess.call('%s %s /LoadConfigFromFiles "%s" -ListFiles "%s" -AllWritable'%(GEAR, BASE_DEVELOP, rollback_path, list_fn))
+            
 
 def commit():
     print('Not implemented')

@@ -17,10 +17,8 @@
     
     "base_dump" : {
         "VER" : "8.3.13.1576",
-        "MASTER" : "C:\\icdump\\master",
-        "DEVELOP" : "C:\\icdump\\develop",
-        "REPO" : "C:\\icdump\\repo"
-    },
-
-    "debug" : false
+        "MASTER" : ".\\master",
+        "DEVELOP" : ".\\develop",
+        "REPO" : ".\\repo_test"
+    }
 }
