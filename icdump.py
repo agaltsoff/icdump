@@ -89,7 +89,7 @@ def develop():
 
 #upload repo files to develop configuration
 def checkout():
-    subprocess.call('%s %s /LoadConfigFromFiles %s -AllWritable'%(GEAR, BASE_DEVELOP, base_dump.REPO))
+    subprocess.call('%s %s /LoadConfigFromFiles "%s"'%(GEAR, BASE_DEVELOP, base_dump.REPO))
 
 # create rollback directory of master files that are developed and upload them to develop configuration
 def rollback():
@@ -114,17 +114,12 @@ def rollback():
     file_list= ''
 
     for root, dirs, files in os.walk(rollback_path):
-        if root != rollback_path:
-            for fn in files: file_list+= os.path.join(root, fn) + '\n'
-
-    if file_list != '': file_list= file_list[:-1]
+        file_list+= ' ' + ' '.join('"%s"'%(os.path.join(root, file)) for file in files if root != rollback_path and file[-3:] != 'bsl')
 
     list_fn= os.path.join(rollback_path, 'filelist.txt');
+    with open(list_fn, 'w', 'utf-8') as list_file: list_file.write(file_list)
 
-    with open(list_fn, 'w', 'utf-8') as list_file:
-        list_file.write(file_list)
-
-    subprocess.call('%s %s /LoadConfigFromFiles "%s" -ListFiles "%s" -AllWritable'%(GEAR, BASE_DEVELOP, rollback_path, list_fn))
+    subprocess.call('%s %s /LoadConfigFromFiles "%s" -Files %s'%(GEAR, BASE_DEVELOP, rollback_path, file_list))
             
 
 def commit():
