@@ -41,7 +41,7 @@ commands= {
 }
 
 parser = argparse.ArgumentParser(description='Выгрузка начального состояния изменений конфигурации 1С типовыми средствами', formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('command', metavar='COMMAND', type=str, choices= commands.keys(), help='\n'.join("%s\t%s" % (name, descr) for (name, descr) in commands.items()))
+parser.add_argument('command', metavar='COMMAND', type=str, nargs= '+', choices= commands.keys(), help='\n'.join("%s\t%s" % (name, descr) for (name, descr) in commands.items()))
 parser.add_argument('--config', metavar='CONFIG', type=str, help='Файл настроек в формате json', default='.\\config.json')
 parser.add_argument('--path', metavar='PATH', type=str, help='Рабочий каталог', default='.\\')
 

@@ -116,7 +116,7 @@ if __name__ == '__main__':
 
     os.chdir(args.path)
 
-    locals()[args.command]()
+    for command in args.command: locals()[command]()
 
     os.chdir(cwd)
 
